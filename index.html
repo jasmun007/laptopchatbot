@@ -1,30 +1,47 @@
 <!doctype html>
 <html lang="en">
+    <!--HEADER START HERE -->
+    <head>
+        <meta charset="utf-8" />
+		<title>Laptop Advisor</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <link rel="stylesheet" href="style.css">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    </head>
+	<!--HEADER END HERE -->
+	<!--BODY START HERE -->
+    <body>
+		    <!--CONTENTS START HERE -->
+        <main>
+            <!--TITLE AND IMAGE START HERE -->
+            <h1><img src="dist/assets/laptop.png" width="70"> Laptop Advisor</h1>
+            <!--TITLE AND IMAGE END HERE -->
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Laptop Advisor</title>
-</head>
+            <!-- CHATBOX DIV START HERE -->
+            <div class="chatbox">
+              <!-- DYNAMIC DIV FOR CHAT MESSAGES PLACED HERE -->
+            </div>
+            <!-- CHATBOX DIV END HERE -->
 
-<body>
-  <main>
-    <h1><img src= "/dist/assets/laptop.png" width="70"  img> Laptop Advisor
-    </h1>
-    <p class="output"></p>
-    <form class="chatbox">
-      <div class="prompt-box">
-        <label>
-          <input name="prompt" placeholder="Ask Questions / Reply Here" type="text">
-        </label>
-        <button class="send" type="submit">Send</button>
-      </div>
-    </form>
-    <p class="prompt-example">for example: </p>
-    <p class="prompt-example">Help me decide which laptop I should Buy</p>
-  </main>
+            <!--INPUT AND SEND START HERE -->
+            <form class="input-box">
+                <div class="prompt-box">
+                    <label>
+                        <input name="prompt" placeholder="Ask Questions / Reply Here" type="text">
+                    </label>
+                    <button class="send" type="submit">Send</button>
+                </div>
+            </form>
+            <!--INPUT AND SEND END HERE -->
 
-  <script type="module" src="/main.js"></script>
-</body>
+            <!-- EXAMPLES START HERE -->
+            <p class="prompt-example">Example Prompt: </p>
+            <p class="prompt-example">Help me decide which laptop I should Buy</p>
+            <!-- EXAMPLES END HERE -->
 
+        </main>
+		    <!--CONTENTS END HERE -->
+        <script type="module" src="main.js"></script>
+    </body>
+	<!--BODY END HERE -->
 </html>

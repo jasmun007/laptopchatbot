@@ -1,4 +1,3 @@
-
 import {
   GoogleGenerativeAI,
   HarmBlockThreshold,
@@ -9,29 +8,50 @@ import "./style.css";
 
 let API_KEY = "AIzaSyDJoJ8w8OMluwPH4wGqzpwFFKgO-G13bYE";
 
-let form = document.querySelector("form");
-let promptInput = document.querySelector('input[name="prompt"]'); //changed input to be read only
-let output = document.querySelector(".output");
-let sendButton = document.querySelector(".send"); //added send button
+let promptInput = document.querySelector('input[name="prompt"]'); // changed input to read only
+let chatMessages = document.querySelector(".chat-messages"); // changed to chat messages instead
+let sendButton = document.querySelector(".send"); // added send button
 
 let conversationHistory = []; // Initialize conversation history
 
 const md = new MarkdownIt();
 
+// Function to display messages in chat
 const displayMessage = (message, role) => {
+  
+  // create dynamic div if it don't exist
+  let messageContainer = document.querySelector('.message-container');
+  if (!messageContainer) {
+    messageContainer = document.createElement('div');
+    messageContainer.className = 'message-container has-messages';
+    document.querySelector('main').insertBefore(messageContainer, document.querySelector('.input-box'));
+    
+    const chatMessages = document.createElement('div');
+    chatMessages.className = 'chat-messages';
+    messageContainer.appendChild(chatMessages);
+  }
+
+  const chatMessages = document.querySelector(".chat-messages");
   const messageDiv = document.createElement("div");
   messageDiv.classList.add("message", role);
   messageDiv.innerHTML = md.render(message);
-  output.appendChild(messageDiv);
-  output.scrollTop = output.scrollHeight; // Scroll to bottom
+  chatMessages.appendChild(messageDiv);
+
+  // smooth scroll
+  messageContainer.scrollTo({
+    top: messageContainer.scrollHeight,
+    behavior: 'smooth'
+  });
 };
 
+// Function to get AI response
 const getResponse = async (userPrompt) => {
   let fullPrompt = `You are a specialized assistant whose sole purpose is to help users buy laptops.
-  You can provide information about laptop specifications, compare models, recommend laptops based on user needs, and guide users through the purchasing process
-  choose for the user based on their requirements. You will assume the user doesn't know much about laptops and will need to reduce the amount of jargon you use as much as possible.
-  You cannot assist with any other topics or tasks. You will only as for the requirments once and not ask for clarification. You will assume the user is in the UK.You can use the internet to find specific items and provide links to the products you suggest.
-  If a user asks you about something unrelated to buying laptops, respond with a clear message indicating that you can only help with laptop-related matters.`;
+  You can provide information about laptop specifications, compare models, recommend laptops based on user needs, and guide users through the purchasing process.
+  You will choose for the user based on their requirements. You will assume the user doesn't know much about laptops and will reduce the amount of jargon as much as possible.
+  You cannot assist with any other topics or tasks. You will only ask for the requirements once and not ask for clarification. You will assume the user is in the UK.
+  You can use the internet to find specific items and provide links to the products you suggest.
+  If a user asks about something unrelated to buying laptops, respond with a clear message indicating that you can only help with laptop-related matters.`;
 
   // Add conversation history to the prompt
   if (conversationHistory.length > 0) {
@@ -42,7 +62,7 @@ const getResponse = async (userPrompt) => {
   }
 
   fullPrompt += `\n\nUser: ${userPrompt}\nAssistant:`;
-  
+
   let contents = [{ parts: [{ text: fullPrompt }] }];
 
   const genAI = new GoogleGenerativeAI(API_KEY);
@@ -59,53 +79,42 @@ const getResponse = async (userPrompt) => {
   const result = await model.generateContentStream({ contents });
   let fullResponse = "";
 
-  output.innerHTML = "";
-  
   for await (let response of result.stream) {
-      fullResponse += response.text();
+    fullResponse += response.text();
   }
-  
-    // Display the full response once
-    displayMessage(fullResponse, "assistant");
 
+  // Display assistant's response
+  displayMessage(fullResponse, "assistant");
 
-  // Add the assistant's response to the conversation history
+  // response to convo history
   conversationHistory.push({
     role: "Assistant",
     message: fullResponse,
   });
 };
 
+// Event listener for send button
 sendButton.addEventListener("click", async (ev) => {
-    ev.preventDefault();
-    const userPrompt = promptInput.value;
+  ev.preventDefault();
+  const userPrompt = promptInput.value.trim();
 
-    if (!userPrompt) {
-      return;
-    }
-  
-    //display user prompt
-    displayMessage(userPrompt, "user");
+  if (!userPrompt) {
+    return;
+  }
 
-    promptInput.value = ""; // Clear input field
-  
-    // Add the user's prompt to the conversation history
-    conversationHistory.push({ role: "User", message: userPrompt });
-  
-    //disable button
-    sendButton.disabled = true;
-    sendButton.textContent = "Sending...";
-  
-    try {
-      await getResponse(userPrompt);
-    } catch (e) {
-      displayMessage("<hr>" + e, "error");
-    }
-  
-    //enable button
-    sendButton.disabled = false;
-    sendButton.textContent = "Send";
-  });
-  
-  
-  
+  displayMessage(userPrompt, "user");
+  promptInput.value = "";
+  conversationHistory.push({ role: "User", message: userPrompt });
+
+  sendButton.disabled = true;
+  sendButton.textContent = "Sending...";
+
+  try {
+    await getResponse(userPrompt);
+  } catch (e) {
+    displayMessage(`<hr>${e}`, "error");
+  }
+
+  sendButton.disabled = false;
+  sendButton.textContent = "Send";
+});
