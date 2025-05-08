@@ -1,32 +1,101 @@
 <!doctype html>
 <html lang="en">
-
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Laptop Advisor</title>
-  <script type="module" crossorigin src="/assets/index-f9f5b4c8.js"></script>
-  <link rel="stylesheet" href="/assets/index-9cd50e50.css">
-</head>
-
-<body>
-  <main>
-    <h1><img src= "/assets/laptop-9b5ed41c.png" width="70"  img> Laptop Advisor
-    </h1>
-    <p class="output"></p>
-    <form class="chatbox">
-      <div class="prompt-box">
-        <label>
-          <input name="prompt" placeholder="Ask Questions / Reply Here" type="text">
-        </label>
-        <button class="send" type="submit">Send</button>
-      </div>
-    </form>
-    <p class="prompt-example">for example: </p>
-    <p class="prompt-example">Help me decide which laptop I should Buy</p>
-  </main>
-
-  
-</body>
-
+    <!--HEADER START HERE -->
+    <head>
+        <meta charset="utf-8" />
+        <title>Laptop Advisor</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        
+        <link rel="stylesheet" href="https:/cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+      <script type="module" crossorigin src="/assets/index-dd82a506.js"></script>
+      <link rel="stylesheet" href="/assets/index-89deb3bf.css">
+    </head>
+    <!--HEADER END HERE -->
+    <!--BODY START HERE -->
+    <body>
+        <!---CARUSEL START HERES--->
+        <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="/assets/laptop1-carousel-1feef022.jpg" class="d-block w-100">
+                    <div class="carousel-caption">
+                        <h5><b>WELCOME TO LAPTOP ADVISOR</b></h5>
+                        <p>To begin click below!</p>
+                        <a href="#prompt-intro" class="carousel-btn">Start Here</a>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="/assets/laptop2-carousel-c0814a83.jpg" class="d-block w-100">
+                    <div class="carousel-caption">
+                        <h5><b>THE BEST LAPTOP ADVISOR</b></h5>
+                        <p>Powered by Gemini AI</p>
+                        <a href="#prompt-intro" class="carousel-btn">Start Here</a>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+        <!---CARUSEL END HERE--->
+        <!---PROMPT INTRO START HERE--->
+        <section id="prompt-intro" class="prompt section-padding">
+            <li id="prompt-intro"></li>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="section-header text-center pb-5">
+                            <h2>How to use the Laptop Advisor?</h2>
+                            <hr>
+                            <h5>Simply type in the prompt box below stating what you need help with! Refresh the site to restart the Chatbox! Use this as an example prompt: "I need help purchasing a laptop" </h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!---PROMPT INTRO END HERE--->
+        <!--CONTENTS START HERE -->
+        <main>
+            <!--TITLE AND IMAGE START HERE -->
+            <h1><img src="/assets/laptop-9b5ed41c.png" width="70"> Laptop Advisor</h1>
+            <!--TITLE AND IMAGE END HERE -->
+            <!-- CHATBOX DIV START HERE -->
+            <div class="chatbox">
+                <!-- DYNAMIC DIV FOR CHAT MESSAGES PLACED HERE -->
+            </div>
+            <!-- CHATBOX DIV END HERE -->
+            <!--INPUT AND SEND START HERE -->
+            <form class="input-box">
+                <div class="prompt-box">
+                    <label>
+                        <input name="prompt" placeholder="Ask Questions / Reply Here" type="text">
+                    </label>
+                    <button class="send" type="submit">Send</button>
+                </div>
+            </form>
+            <!--INPUT AND SEND END HERE -->
+        </main>
+        <!---FOOTER START HERE--->
+        <footer class="bg-dark p-2 text-center">
+            <div class="container">
+                <p class="text-white">All Right Reserved @ Laptop Advisor</p>
+            </div>
+        </footer>
+        <!---FOOTER END HERE--->
+        <!--CONTENTS END HERE -->
+        
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    </body>
+    <!--BODY END HERE -->
 </html>
